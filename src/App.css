@@ -1,0 +1,115 @@
+
+header {
+  background-color: #222;
+  padding: 16px;
+  color: white;
+  font-size: 18px;
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-arrow {
+  margin: 0 10px;
+}
+
+.categories {
+  float: left;
+  width: 100%;
+  text-align: left;
+}
+
+.subheader {
+  background-color: #eee;
+  padding: 10px 16px;
+}
+
+.list {
+  padding: 0
+}
+
+.item {
+  list-style: none;
+  width: 92%;
+  padding: 16px 2%;
+  margin: 16px auto;
+  font-size: 18px;
+}
+
+.paper {
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.12) 0px 1px 4px;
+  background: #fff;
+}
+
+.votes-cont {
+  margin-top: 20px;
+  color: #555;
+}
+
+.comments-cont {
+  background: #eee;
+  padding: 10px 0;
+  margin: 10px 0 !important;
+}
+
+.comment-author {
+  color: #9494e0;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.input-field {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.button-style {
+  background: #1981d4;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 12px;
+}
+
+.sort-by-cont{
+  margin: 7px 0;
+}
+
+.post-form-cont {
+  padding: 60px 0;
+}
+
+.edit-comment-modal-cont {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.6);
+  overflow: auto;
+}
+
+.edit-comment-modal{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 90%;
+  max-width: 500px;
+  background: #fff;
+  display: table;
+}
+
+.edit-comment-form {
+  padding: 10px 0;
+}
