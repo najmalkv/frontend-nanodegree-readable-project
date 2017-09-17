@@ -67,7 +67,7 @@ function posts (state = {posts: [], post:{}, filteredPosts: [], sortBy: 'vote-hi
 	 case RECEIVE_COMMENTS_COUNT :
 	  return {
 	    ...state,
-      filteredPosts: state.posts.map(item => item.id === post.id
+      filteredPosts: state.filteredPosts.map(item => item.id === post.id
         ? {...item , commentsCount: comments.length}
         : item
         ),
@@ -94,6 +94,10 @@ function posts (state = {posts: [], post:{}, filteredPosts: [], sortBy: 'vote-hi
 	 case VOTE_POST_BY_ID :
 	  return {
 	    ...state,
+      filteredPosts: state.filteredPosts.map(item => item.id === post.id
+        ? post
+        : item
+        ),
 	    posts: state.posts.map(item => item.id === post.id
 	    	? post
 	    	: item
