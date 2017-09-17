@@ -26,10 +26,22 @@ import {
 class PostDetailsView extends Component {
 
 
+
 	componentWillMount(){
 
 	 	// read id parameter from url
 	 	this.id = this.props.location.match.params.id
+
+	}
+
+	componentWillReceiveProps(newProps) {
+
+
+	  if(this.props.location.match.params.id !== newProps.location.match.params.id){
+	     this.props.receivePost(newProps.location.match.params.id)
+		 this.props.receiveComments(newProps.location.match.params.id)
+	  }
+
 
 	}
 
