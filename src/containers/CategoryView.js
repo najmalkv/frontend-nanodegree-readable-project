@@ -25,6 +25,16 @@ componentWillMount(){
 
 }
 
+componentWillReceiveProps(newProps) {
+
+    if(this.props.location.match.params.category !== newProps.location.match.params.category){
+    this.category = newProps.location.match.params.category
+    this.props.receivePosts(newProps.location.match.params.category)
+  }
+
+
+}
+
 componentDidMount() {
 
     // action to receive posts based on category
@@ -45,7 +55,7 @@ render() {
          {capitalize(this.category)} Posts
        </header>
        <div className="content">
-        <Posts list={posts.posts} title={this.category}/>
+        <Posts location={location} posts={posts.filteredPosts}/>
        </div>
       </section>
     );

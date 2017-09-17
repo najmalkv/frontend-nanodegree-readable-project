@@ -87,6 +87,17 @@ header {
   padding: 60px 0;
 }
 
+.post-divider {
+  margin-top: 10px;
+}
+
+.post-menu-item {
+  white-space: pre-wrap !important;
+  line-height: 30px !important;
+  min-height: 30px !important;
+  padding: 5px 0 !important;
+}
+
 .edit-comment-modal-cont {
   position: fixed;
   left: 0;

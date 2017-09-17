@@ -1,35 +1,40 @@
-import React from 'react'
+import React, { Component } from 'react';
 
-// link component from react router
-import { Link } from 'react-router-dom';
+import Post from '../components/Post'
 
-export default function Posts ({ list, title }) {
+
+class Posts extends Component {
+
+render() {
+
+ const {posts,  location} = this.props
+
 
   return (
 
-    <div className='categories'>
+    <div className='container-fluid'>
 
-      <ul className="list">
+        {posts.filter((post) => post.deleted === false).map((item, index) => (
 
-        {list.filter((post) => post.deleted === false).map((item, index) => (
-
-          <Link key={index} to={ '/posts/'+ item.category +'/' + item.id}>
-
-	           <li  key={index} className="item paper">
-	            {item.title}
-	          </li>
-
-          </Link>
+			   <Post location={location} key={index} post={item}/>
 
         ))}
 
-        {list.length === 0 &&
+       {posts.length === 0 &&
 
-          <li   className="item">
+          <div   className="item">
             No Posts
-          </li>
+          </div>
+
       	}
-      </ul>
+
     </div>
   )
+ }
 }
+
+
+
+
+export default Posts;
+

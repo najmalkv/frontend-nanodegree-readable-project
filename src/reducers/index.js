@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux'
 
 import {
+
+  TOGGLE_SIDE_NAV,
   RECEIVE_CATEGORIES,
   RECEIVE_POSTS,
+  RECEIVE_COMMENTS_COUNT,
   CHANGE_SORT_POSTS,
   RECEIVE_POSTS_BY_CATEGORY,
   RECEIVE_POST_BY_ID,
@@ -22,6 +25,19 @@ import {
 
 } from '../actions'
 
+function common (state={sideNavIsShow: false}, action) {
+  switch (action.type) {
+    case TOGGLE_SIDE_NAV :
+      const { isShow } = action
+
+      return {
+        ...state,
+        sideNavIsShow: isShow,
+      }
+    default :
+      return state
+  }
+}
 
 function categories (state = {categories: []}, action) {
 
@@ -38,9 +54,9 @@ function categories (state = {categories: []}, action) {
   }
 }
 
-function posts (state = {posts: [], post:{}, sortBy: 'vote-high-to-low'}, action) {
+function posts (state = {posts: [], post:{}, filteredPosts: [], sortBy: 'vote-high-to-low'}, action) {
 
-  const { posts, post, sortBy, field, value } = action
+  const { posts, post, sortBy, field, value, comments } = action
 
   switch (action.type) {
     case RECEIVE_POSTS :
@@ -48,6 +64,18 @@ function posts (state = {posts: [], post:{}, sortBy: 'vote-high-to-low'}, action
         ...state,
         posts: posts,
       }
+	 case RECEIVE_COMMENTS_COUNT :
+	  return {
+	    ...state,
+      filteredPosts: state.posts.map(item => item.id === post.id
+        ? {...item , commentsCount: comments.length}
+        : item
+        ),
+	    posts: state.posts.map(item => item.id === post.id
+	    	? {...item , commentsCount: comments.length}
+	    	: item
+        ),
+	  }
      case CHANGE_SORT_POSTS :
      return {
         ...state,
@@ -56,7 +84,7 @@ function posts (state = {posts: [], post:{}, sortBy: 'vote-high-to-low'}, action
      case RECEIVE_POSTS_BY_CATEGORY :
       return {
         ...state,
-        posts: posts,
+        filteredPosts: posts,
       }
 	 case RECEIVE_POST_BY_ID :
 	  return {
@@ -66,6 +94,10 @@ function posts (state = {posts: [], post:{}, sortBy: 'vote-high-to-low'}, action
 	 case VOTE_POST_BY_ID :
 	  return {
 	    ...state,
+	    posts: state.posts.map(item => item.id === post.id
+	    	? post
+	    	: item
+        ),
 	    post: post,
 	  }
 	 case ADD_POST :
@@ -77,7 +109,6 @@ function posts (state = {posts: [], post:{}, sortBy: 'vote-high-to-low'}, action
 	  return {
 	    ...state,
 	    post: {...state.post, [field]: value}
-
 	  }
 	 case EDIT_POST :
 	  return {
@@ -160,6 +191,7 @@ function comments (state = {comments: [], comment: {} , sortBy: 'vote-high-to-lo
 }
 
 export default combineReducers({
+ common,
  categories,
  posts,
  comments

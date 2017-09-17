@@ -1,8 +1,10 @@
 import * as APIUtil from '../utils/api';
 
 // export action names to be used in reducers
+export const TOGGLE_SIDE_NAV = "TOGGLE_SIDE_NAV";
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES";
 export const RECEIVE_POSTS = "RECEIVE_POSTS";
+export const RECEIVE_COMMENTS_COUNT = "RECEIVE_COMMENTS_COUNT";
 export const CHANGE_SORT_POSTS = "CHANGE_SORT_POSTS";
 export const RECEIVE_POSTS_BY_CATEGORY = "RECEIVE_POSTS_BY_CATEGORY";
 export const RECEIVE_POST_BY_ID = "RECEIVE_POST_BY_ID";
@@ -20,6 +22,12 @@ export const TOGGLE_COMMENT_MODAL = "TOGGLE_COMMENT_MODAL";
 export const UPDATE_COMMENT = "UPDATE_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 
+// togle side nav
+export const toggleSideNav = isShow => ({
+  type: TOGGLE_SIDE_NAV,
+  isShow
+});
+
 // get all categories
 export const receiveCategories = categories => ({
   type: RECEIVE_CATEGORIES,
@@ -33,6 +41,19 @@ export const fetchCategories = () => dispatch => (
       .then(categories => dispatch(receiveCategories(categories)))
 );
 
+// get all comments for all posts
+export const receiveCommentsCount = (comments, post) => ({
+  type: RECEIVE_COMMENTS_COUNT,
+  comments,
+  post
+});
+
+export const fetchCommentsCount = (id, post) => dispatch => (
+  APIUtil
+      .fetchComments(id)
+      .then(comments => dispatch(receiveCommentsCount(comments, post)))
+);
+
 
 // get all posts
 export const receivePosts = posts => ({
@@ -44,8 +65,8 @@ export const fetchPosts = () => dispatch => (
   APIUtil
       .fetchPosts()
       .then(posts => dispatch(receivePosts(posts)))
-);
 
+);
 
 // change post sort order
 export const changePostsSortOrder = sortBy => ({
@@ -135,7 +156,7 @@ export const fetchDeletePost = (id) => dispatch => (
 );
 
 // get all comments for a post
-export const receiveComments = comments => ({
+export const receiveComments = (comments) => ({
   type: RECEIVE_COMMENTS,
   comments
 });

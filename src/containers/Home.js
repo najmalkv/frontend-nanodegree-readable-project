@@ -81,7 +81,7 @@ class Home extends Component {
         </div>
          <div className="row">
           <div className="col-xs-12">
-             <Posts list={posts.posts}  />
+             <Posts location={location} posts={posts.posts}/>
           </div>
          </div>
          <div className="row">

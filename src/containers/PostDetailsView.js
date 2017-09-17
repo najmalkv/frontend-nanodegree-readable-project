@@ -131,24 +131,24 @@ class PostDetailsView extends Component {
 
 	        	Post Details
 
-				<button
+				{ Object.keys(posts.post).length > 0 && <button
 					 className="button-style pull-right"
 					 onClick={() => {
 					 	deletePost(posts.post.id)
 					 	location.history.push('/')
 					 }}>
 					Delete Post
-				</button>
+				</button>}
 
-	        	<button
+	        	{ Object.keys(posts.post).length > 0 && <button
 		        	 className="button-style pull-right"
 		        	 onClick={() => location.history.push('/edit-post/' + posts.post.id)}>
 		        	 Edit Post
-		        </button>
+		        </button>}
 
 	       </header>
 
-	       <div className="container-fluid content">
+	       { Object.keys(posts.post).length > 0 ? (<div className="container-fluid content">
 
 	       	<div className="row">
 
@@ -314,7 +314,15 @@ class PostDetailsView extends Component {
 					</div>
 				</div>
 
-	      </div>
+	      </div>) : (
+
+		  <div className="row">
+			<div className="col-xs-12 text-center">
+				<h3>Post Not found</h3>
+			</div>
+		  </div>
+
+	      )}
 			{ comments.isShowCommentModal &&
 			<div className="edit-comment-modal-cont">
 			 <div className="edit-comment-modal">
